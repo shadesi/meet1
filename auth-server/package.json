@@ -1,0 +1,17 @@
+{
+  "name": "auth-server",
+  "version": "1.0.0",
+  "description": "Serverless AWS Node.js service",
+  "main": "handler.js",
+  "scripts": {
+    "start": "serverless offline start",
+    "deploy": "serverless deploy",
+    "invoke": "serverless invoke --function hello"
+  },
+  "dependencies": {
+    "googleapis": "^110.0.0",
+    "serverless": "^4.2.4"
+  },
+  "author": "",
+  "license": "ISC"
+}
