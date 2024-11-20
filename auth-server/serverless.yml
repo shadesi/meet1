@@ -1,0 +1,71 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: shadesi
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: meetapp
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: auth-server
+
+plugins:
+  - serverless-dotenv-plugin
+
+custom:
+  dotenv:
+    path: .env
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-central-1
+  timeout: 30 # optional, in seconds
+  environment:
+    CLIENT_ID: ${env:CLIENT_ID}
+    CLIENT_SECRET: ${env:CLIENT_SECRET}
+    CALENDAR_ID: ${env:CALENDAR_ID}
+
+functions:
+  getAuthURL:
+    handler: handler.getAuthURL
+    events:
+      - http:
+          path: api/get-auth-url
+          method: get
+          cors:
+            origin: 'https://shadesi.github.io'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
+
+  getAccessToken:
+    handler: handler.getAccessToken
+    events:
+      - http:
+          path: api/token/{code}
+          method: post
+          cors:
+            origin: 'https://shadesi.github.io'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
+          request:
+            parameters:
+              paths:
+                code: true
+
+  getCalendarEvents:
+    handler: handler.getCalendarEvents
+    events:
+      - http:
+          path: api/get-events/{access_token}
+          method: get
+          cors:
+            origin: 'https://shadesi.github.io'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
+          request:
+            parameters:
+              paths:
+                access_token: true
