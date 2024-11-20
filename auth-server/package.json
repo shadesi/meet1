@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "googleapis": "^110.0.0",
-    "serverless": "^4.2.4"
+    "serverless": "^4.2.4",
+    "serverless-dotenv-plugin": "^6.0.0"
   },
   "author": "",
   "license": "ISC"

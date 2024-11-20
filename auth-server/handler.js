@@ -2,6 +2,10 @@
 
 require('dotenv').config();
 
+console.log('CLIENT_ID:', process.env.CLIENT_ID);
+console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
+console.log('CALENDAR_ID:', process.env.CALENDAR_ID);
+
 const { google } = require('googleapis');
 const calendar = google.calendar('v3');
 const SCOPES = ['https://www.googleapis.com/auth/calendar.events.public.readonly'];

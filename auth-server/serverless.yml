@@ -8,6 +8,10 @@ service: auth-server
 plugins:
   - serverless-dotenv-plugin
 
+custom:
+  dotenv:
+    path: .env
+
 provider:
   name: aws
   runtime: nodejs20.x
@@ -36,8 +40,8 @@ functions:
     handler: handler.getAccessToken
     events:
       - http:
-          path: api/token/{code}  
-          method: post 
+          path: api/token/{code}
+          method: post
           cors:
             origin: 'https://shadesi.github.io'
             headers:
@@ -55,7 +59,7 @@ functions:
       - http:
           path: api/get-events/{access_token}
           method: get
-         cors:
+          cors:
             origin: 'https://shadesi.github.io'
             headers:
               - Content-Type
